@@ -18,7 +18,7 @@ public class HomePageController {
     @RequestMapping(value = "/home",method = RequestMethod.POST)
     public RedirectView EditUser(@RequestParam String password,@RequestParam String name){
         userService.EditUserByPassword(password,name);
-        System.out.println(userService.Showuser());
+        //System.out.println(userService.Showuser());
         return new RedirectView("/home");
     }
 }
