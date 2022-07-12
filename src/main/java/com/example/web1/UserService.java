@@ -21,8 +21,9 @@ public class UserService {
     public void setUserByPassword(String password){
         this.user = userRepository.getUserByPassword(password);
     }
-    public void EditUser(){
-
+    public void EditUserByPassword(String password,String name){
+        userRepository.EditUserByPassword(password,name);
+        user.setName(name);
     }
 
 }
