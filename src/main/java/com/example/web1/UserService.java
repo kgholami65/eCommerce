@@ -16,7 +16,7 @@ public class UserService {
     @Autowired
     User user;
     public String Showuser(){
-        return String.format("%s %s",user.getName(),user.getPassword());
+        return String.format("%s",user.getName());
     }
     public void setUserByPassword(String password){
         this.user = userRepository.getUserByPassword(password);

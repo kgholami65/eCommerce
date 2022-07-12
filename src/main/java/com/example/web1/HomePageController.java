@@ -15,7 +15,11 @@ public class HomePageController {
         model.put("name",userService.Showuser());
         return "home.jsp";
     }
-    @RequestMapping(value = "/home",method = RequestMethod.POST)
+    @RequestMapping(value = "/edituser",method = RequestMethod.GET)
+    public String showEditUser(){
+        return "editUser.jsp";
+    }
+    @RequestMapping(value = "/edituser",method = RequestMethod.POST)
     public RedirectView EditUser(@RequestParam String password,@RequestParam String name){
         userService.EditUserByPassword(password,name);
         //System.out.println(userService.Showuser());
