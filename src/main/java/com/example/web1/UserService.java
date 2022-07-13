@@ -6,15 +6,20 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.Date;
-
 @Service
 @Scope(value = WebApplicationContext.SCOPE_SESSION,proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserService {
-    @Autowired
     UserRepository userRepository;
-    @Autowired
     User user;
+    Transaction transaction;
+
+    @Autowired
+    public UserService(UserRepository userRepository,User user,Transaction transaction){
+        this.user = user;
+        this.userRepository = userRepository;
+        this.transaction = transaction;
+    }
+
     public String Showuser(){
         return String.format("%s",user.getName());
     }
@@ -23,7 +28,7 @@ public class UserService {
     }
     public void EditUserByPassword(String password,String name){
         userRepository.EditUserByPassword(password,name);
-        user.setName(name);
+        user = new User(name,password,user.getDate(), user.getMoney());
     }
 
 }

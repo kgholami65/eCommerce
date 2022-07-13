@@ -15,7 +15,6 @@ public interface UserRepository extends CrudRepository<User,Long> {
     boolean existsUserByName(String name);
     User getUserByPassword(String password);
     @Modifying
-    @Transactional
     @Query("UPDATE User u SET u.name = :name WHERE u.password = :password")
     int EditUserByPassword(@Param(value = "password") String password,@Param("name") String name);
 }
