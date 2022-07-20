@@ -5,6 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Repository
@@ -13,13 +15,17 @@ import java.util.Date;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
     private Long id;
     @Column(unique = true)
     private String name;
-    @Column(unique = true)
     private String password;
     private Date date;
     private double money;
+    @OneToMany(mappedBy = "user")
+    private Set<Transaction> transactions = new HashSet<>();
+
+
     public User(String name, String password, Date date, double money){
         this.name = name;
         this.password = password;
@@ -62,4 +68,6 @@ public class User {
     public void setMoney(double money){
         this.money = money;
     }
+
+
 }

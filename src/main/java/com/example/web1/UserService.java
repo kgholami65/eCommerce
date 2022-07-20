@@ -20,12 +20,17 @@ public class UserService {
         this.transaction = transaction;
     }
 
-    public String Showuser(){
-        return String.format("%s",user.getName());
+
+    public User Showuser(){
+        return user;
     }
+
+
     public void setUserByPassword(String password){
         this.user = userRepository.getUserByPassword(password);
     }
+
+
     public void EditUserByPassword(String password,String name){
         userRepository.EditUserByPassword(password,name);
         user = new User(name,password,user.getDate(), user.getMoney());

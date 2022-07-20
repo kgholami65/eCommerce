@@ -11,7 +11,11 @@
     <title>HomePage</title>
 </head>
 <body>
-    ${name}
+    <a href="/showuser">Show user</a>
     <a href="/edituser">Edit User</a>
+    <a href="/viewitems">View items</a>
+    <a href="/additem">Add item</a>
+    <a href="/deposit">Deposit money</a>
+    <a href="/buyitems">Buy items</a>
 </body>
 </html>
