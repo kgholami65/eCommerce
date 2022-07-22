@@ -1,7 +1,6 @@
 package com.example.web1;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 public class Item {

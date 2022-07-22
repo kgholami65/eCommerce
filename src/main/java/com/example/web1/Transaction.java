@@ -1,18 +1,9 @@
 package com.example.web1;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-import org.springframework.web.context.WebApplicationContext;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
-@Scope(value = WebApplicationContext.SCOPE_REQUEST,proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Entity
 public class Transaction {
     private TransactionType transactionType;

@@ -1,10 +1,7 @@
 package com.example.web1;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.WebApplicationContext;
+
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,7 +10,6 @@ import java.util.Set;
 
 @Entity
 @Transactional
-@Scope(value = WebApplicationContext.SCOPE_SESSION,proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
