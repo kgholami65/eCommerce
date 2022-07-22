@@ -9,4 +9,8 @@ public interface ItemRepository extends CrudRepository<Item,Long> {
     Item findItemById(long id);
 
     Iterable<Item> findAll();
+
+    Item findItemBySeriesNumber(long series);
+
+    boolean existsItemsBySeriesNumber(long series);
 }

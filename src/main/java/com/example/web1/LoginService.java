@@ -13,7 +13,11 @@ public class LoginService {
     public boolean ValidateUser(String password, String name){
         return userRepository.existsUserByPassword(password) && userRepository.existsUserByName(name);
     }
+
+
     public void AddUser(String name, String password, Date date){
         userRepository.save(new User(name,password,date, 0));
     }
+
+
 }

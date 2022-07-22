@@ -18,11 +18,13 @@ import java.util.Date;
 public class LoginController {
     LoginService loginService;
     UserService userService;
+    TransactionService transactionService;
 
     @Autowired
-    public LoginController(LoginService loginService,UserService userService){
+    public LoginController(LoginService loginService,UserService userService,TransactionService transactionService){
         this.userService = userService;
         this.loginService = loginService;
+        this.transactionService = transactionService;
     }
 
 
@@ -38,6 +40,7 @@ public class LoginController {
             return new RedirectView("/login");
         else {
             userService.setUserByPassword(password);
+            transactionService.setUser(userService.getUser());
             return new RedirectView("/home");
         }
     }

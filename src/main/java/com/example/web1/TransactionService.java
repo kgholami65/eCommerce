@@ -3,37 +3,47 @@ package com.example.web1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.Date;
+
 @Service
 public class TransactionService {
     private User user;
     private Transaction transaction;
-    private TransactionRepository transactionRepository;
-    private UserRepository userRepository;
-
-
     @Autowired
-    public TransactionService(User user,Transaction transaction,TransactionRepository transactionRepository,
-    UserRepository userRepository){
-        this.transaction = transaction;
+    private TransactionRepository transactionRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private ItemRepository itemRepository;
+
+
+
+
+    public void setUser(User user) {
         this.user = user;
-        this.transactionRepository = transactionRepository;
-        this.userRepository = userRepository;
     }
+
     public void deposit(double money){
-        transaction.setAmount(money);
-        user.setMoney(user.getMoney() + transaction.getAmount());
-        transaction.setTransactionType(TransactionType.DEPOSIT);
-        userRepository.EditUserById(user.getMoney(),user.getId());
+        user.setMoney(user.getMoney() + money);
+        userRepository.EditUserByName(user.getMoney(),user.getName());
+        transactionRepository.save(new Transaction(TransactionType.DEPOSIT,money,user) );
     }
 
 
     public boolean withdrawal(Item item){
-        transaction.setTransactionType(TransactionType.WITHDRAWAL);
         if(item.getPrice() > user.getMoney())
             return false;
         else{
             user.setMoney(user.getMoney() - item.getPrice());
+            userRepository.EditUserByName(user.getMoney(),user.getName());
+            transactionRepository.save(new Transaction(TransactionType.WITHDRAWAL, item.getPrice(), user));
+            itemRepository.delete(item);
             return true;
         }
+    }
+
+    public Iterable<Transaction> getAllTransactions(){
+        return transactionRepository.findAllByUser(user);
     }
 }

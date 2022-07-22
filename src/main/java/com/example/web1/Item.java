@@ -11,7 +11,7 @@ public class Item {
     private double price;
     private String name;
     @Column(unique = true)
-    private Long seriesNumber;
+    private long seriesNumber;
 
     public Item(double price, String name, Long seriesNumber) {
         this.price = price;

@@ -12,8 +12,8 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
 
-    public Item getItem(long id){
-        return itemRepository.findItemById(id);
+    public Item getItemBySeries(long series){
+        return itemRepository.findItemBySeriesNumber(series);
     }
 
     public Iterable<Item> getAllItems(){
@@ -22,5 +22,9 @@ public class ItemService {
 
     public void save(Item item){
         itemRepository.save(item);
+    }
+
+    public boolean ValidateItem(long series){
+        return itemRepository.existsItemsBySeriesNumber(series);
     }
 }

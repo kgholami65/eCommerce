@@ -7,22 +7,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 @Service
-@Scope(value = WebApplicationContext.SCOPE_SESSION,proxyMode = ScopedProxyMode.TARGET_CLASS)
+//@Scope(value = WebApplicationContext.SCOPE_SESSION,proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserService {
+    @Autowired
     UserRepository userRepository;
     User user;
     Transaction transaction;
 
-    @Autowired
-    public UserService(UserRepository userRepository,User user,Transaction transaction){
-        this.user = user;
-        this.userRepository = userRepository;
-        this.transaction = transaction;
+
+    public User getUser() {
+        return user;
     }
 
-
     public User Showuser(){
-        return user;
+        return userRepository.findUserById(user.getId());
     }
 
 
@@ -33,7 +31,7 @@ public class UserService {
 
     public void EditUserByPassword(String password,String name){
         userRepository.EditUserByPassword(password,name);
-        user = new User(name,password,user.getDate(), user.getMoney());
+        user.setName(name);
     }
 
 }
