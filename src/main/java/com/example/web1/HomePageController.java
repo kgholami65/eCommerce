@@ -76,7 +76,8 @@ public class HomePageController {
     @RequestMapping(value = "/buyitems", method = RequestMethod.POST)
     public RedirectView withdraw(@RequestParam long series) {
         if (itemService.ValidateItem(series)) {
-            transactionService.withdrawal(itemService.getItemBySeries(series));
+            if(!transactionService.withdrawal(itemService.getItemBySeries(series)))
+                return new RedirectView("/buyitems");
             return new RedirectView("/home");
         } else
             return new RedirectView("/buyitems");
