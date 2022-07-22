@@ -5,11 +5,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    @Autowired
     UserRepository userRepository;
     User user;
     Transaction transaction;
 
+
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public User getUser() {
         return user;
