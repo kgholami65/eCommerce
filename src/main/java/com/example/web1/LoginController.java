@@ -1,5 +1,7 @@
 package com.example.web1;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ public class LoginController {
     LoginService loginService;
     UserService userService;
     TransactionService transactionService;
+    private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     public LoginController(LoginService loginService,UserService userService,TransactionService transactionService){
@@ -33,10 +36,13 @@ public class LoginController {
 
     @RequestMapping(value = "/login" , method = RequestMethod.POST)
     public RedirectView handlelogin(@RequestParam String name,@RequestParam String password){
-        if(!loginService.ValidateUser(password,name))
+        if(!loginService.ValidateUser(password,name)) {
+            log.info("User is not valid");
             return new RedirectView("/login");
+        }
         else {
             userService.setUserByPassword(password);
+            log.info("an");
             transactionService.setUser(userService.getUser());
             return new RedirectView("/home");
         }

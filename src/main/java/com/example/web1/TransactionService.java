@@ -7,16 +7,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class TransactionService {
     private User user;
-    private Transaction transaction;
-    @Autowired
     private TransactionRepository transactionRepository;
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
     private ItemRepository itemRepository;
 
 
-
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+    @Autowired
+    public void setItemRepository(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
+    @Autowired
+    public void setTransactionRepository(TransactionRepository transactionRepository) {
+        this.transactionRepository = transactionRepository;
+    }
 
     public void setUser(User user) {
         this.user = user;

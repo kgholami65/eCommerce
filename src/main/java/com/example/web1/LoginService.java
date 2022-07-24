@@ -14,6 +14,8 @@ public class LoginService {
     public LoginService(UserRepository userRepository){
         this.userRepository = userRepository;
     }
+
+
     public boolean ValidateUser(String password, String name){
         return userRepository.existsUserByPassword(password) && userRepository.existsUserByName(name);
     }
